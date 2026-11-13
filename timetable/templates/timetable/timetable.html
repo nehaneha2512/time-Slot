@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class Timetable</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #263b5e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #263b5e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e4ecf7;
+        }
+
+        .empty {
+            text-align: center;
+            color: red;
+            font-size: 18px;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Class Timetable</h1>
+
+    {% if timetable_records %}
+
+    <table>
+
+        <tr>
+            <th>Day</th>
+            <th>Time Slot</th>
+            <th>Subject</th>
+            <th>Faculty Name</th>
+            <th>Classroom</th>
+        </tr>
+
+        {% for slot in timetable_records %}
+
+        <tr>
+            <td>{{ slot.day }}</td>
+
+            <td>
+                {{ slot.start_time|time:"h:i A" }}
+                -
+                {{ slot.end_time|time:"h:i A" }}
+            </td>
+
+            <td>{{ slot.subject_name }}</td>
+
+            <td>{{ slot.faculty_name }}</td>
+
+            <td>{{ slot.classroom }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+        <p class="empty">
+            No timetable records are available.
+        </p>
+
+    {% endif %}
+
+</body>
+</html>
